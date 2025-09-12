@@ -1,4 +1,4 @@
-import { LitElement, css, html, unsafeCSS } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import styles from "./my-element.css?inline"
 // eslint-disable-next-line import/no-extraneous-dependencies
