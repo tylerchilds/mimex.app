@@ -59,13 +59,8 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
     [
       { path: '/', render: () => html`<home-page></home-page>` },
       { path: '/about', render: () => html`<about-page></about-page>` },
-      { path: '/space/:space/', render: () => html`<h1>Space</h1>` },
-      {
-        path: '/space/:space/about',
-        render: () =>
-          html`<h1>About Space</h1>
-            <my-button></my-button>`,
-      },
+      { path: '/space/:space/', render: () => html`<home-page></home-page>` },
+      { path: '/space/:space/about', render: () => html`<about-page></about-page>` },
     ],
     {
       fallback: {
