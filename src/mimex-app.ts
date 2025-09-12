@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import styles from "./my-element.css?inline"
+import styles from "./mimex-app.css?inline"
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'urlpattern-polyfill';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
@@ -16,7 +16,7 @@ import { AboutPage } from './about-page.ts';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('my-element')
+@customElement('mimex-app')
 export class MyElement extends ScopedElementsMixin(LitElement) {
   /**
    * Copy for the read the docs hint.
