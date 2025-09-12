@@ -1,6 +1,11 @@
 import { LitElement, css, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import styles from "./my-element.css?inline"
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'urlpattern-polyfill';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+import { MyButton } from './my-button.ts';
+import '@webcomponents/scoped-custom-element-registry';
 
 /**
  * An example element.
@@ -9,7 +14,7 @@ import styles from "./my-element.css?inline"
  * @csspart button - The button
  */
 @customElement('my-element')
-export class MyElement extends LitElement {
+export class MyElement extends ScopedElementsMixin(LitElement) {
   /**
    * Copy for the read the docs hint.
    */
@@ -32,9 +37,9 @@ export class MyElement extends LitElement {
           <h1 class="text-9xl text-red-500">my-element</h1>
         </div>
         <br />
-        <button @click=${this._onClick} part="button">
+        <my-button @click=${this._onClick} part="button">
           count is ${this.count}
-        </button>
+        </my-button>
       </div>
     `
   }
@@ -50,6 +55,10 @@ export class MyElement extends LitElement {
       }
     `,
   ]
+
+  static scopedElements = {
+    'my-button': MyButton,
+  };
 }
 
 declare global {
