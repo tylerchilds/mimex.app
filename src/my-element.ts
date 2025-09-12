@@ -1,6 +1,14 @@
-import { LitElement, css, html, unsafeCSS } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import styles from "./my-element.css?inline"
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'urlpattern-polyfill';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+import { MyButton } from './my-button.ts';
+import '@webcomponents/scoped-custom-element-registry';
+import { Routes } from '@lit-labs/router';
+import { HomePage } from './home-page.ts';
+import { AboutPage } from './about-page.ts';
 
 /**
  * An example element.
@@ -9,7 +17,7 @@ import styles from "./my-element.css?inline"
  * @csspart button - The button
  */
 @customElement('my-element')
-export class MyElement extends LitElement {
+export class MyElement extends ScopedElementsMixin(LitElement) {
   /**
    * Copy for the read the docs hint.
    */
@@ -22,34 +30,49 @@ export class MyElement extends LitElement {
   @property({ type: Number })
   count = 0
 
-  render() {
-    return html`
-
-      <slot></slot>
-
-      <div class="card p-8">
-        <div class="prose max-w-none">
-          <h1 class="text-9xl text-red-500">my-element</h1>
-        </div>
-        <br />
-        <button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </button>
-      </div>
-    `
+  connectedCallback(): void {
+    super.connectedCallback?.();
+    // eslint-disable-next-line no-undef
+    this._routes.goto(globalThis?.location.pathname);
   }
 
-  private _onClick() {
-    this.count++
+  render() {
+    return html`
+      <main>
+        ${this._routes.outlet()}
+      </main>
+    `
   }
 
   static styles = [
     unsafeCSS(styles),
-    css`
-      :host {
-      }
-    `,
   ]
+
+  static scopedElements = {
+    'about-page': AboutPage,
+    'home-page': HomePage,
+    'my-button': MyButton,
+  };
+
+  private _routes = new Routes(
+    this,
+    [
+      { path: '/', render: () => html`<home-page></home-page>` },
+      { path: '/about', render: () => html`<about-page></about-page>` },
+      { path: '/space/:space/', render: () => html`<home-page></home-page>` },
+      { path: '/space/:space/about', render: () => html`<about-page></about-page>` },
+    ],
+    {
+      fallback: {
+        render: () => html`
+          <div class="prose">
+            <h1>Not Found</h1>
+          </div>
+        `,
+      },
+    },
+  );
+
 }
 
 declare global {

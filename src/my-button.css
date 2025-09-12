@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+button {
+  @apply px-4 py-2 cursor-pointer border-2 font-bold rounded active:scale-98;
+}
