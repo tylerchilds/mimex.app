@@ -1,5 +1,6 @@
 # mimex.app plan
 
-* [x] add https://open-wc.org/docs/development/scoped-elements/
-* [x] add a router so there can be multiple routes
-* [x] add /about to test multiple routes
+* [ ] when homepage loads, fetch hardcoded space uuid collection and render data or error
+* [ ] render items better
+* [ ] derive space uuid from location.hostname
+* [ ] add storybook ui for devving elements outside of the main app
