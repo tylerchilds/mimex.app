@@ -65,8 +65,9 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
     {
       fallback: {
         render: () => html`
-          <div class="prose">
+          <div class="p-8 prose">
             <h1>Not Found</h1>
+            <p>Sorry. Try visiting <a href="/">the home page</a>.</p>
           </div>
         `,
       },
