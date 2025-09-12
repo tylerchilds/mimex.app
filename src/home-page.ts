@@ -5,9 +5,9 @@ import { MyButton } from './my-button';
 
 export class HomePage extends ScopedElementsMixin(LitElement) {
   render() {
-    return html`<div class="prose">
-      <h1>Home</h1>
-      <p>Home is where the heart is.</p>
+    return html`<div class="p-8 prose">
+      <h1>Mimex</h1>
+      <p>an exocortex for mimes like you.</p>
     </div>`;
   }
 

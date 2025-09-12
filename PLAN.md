@@ -1,5 +1,5 @@
 # mimex.app plan
 
 * [x] add https://open-wc.org/docs/development/scoped-elements/
-* [ ] add a router so there can be multiple routes
-* [ ] add /about to test multiple routes
+* [x] add a router so there can be multiple routes
+* [x] add /about to test multiple routes

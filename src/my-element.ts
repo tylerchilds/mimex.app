@@ -8,6 +8,7 @@ import { MyButton } from './my-button.ts';
 import '@webcomponents/scoped-custom-element-registry';
 import { Routes } from '@lit-labs/router';
 import { HomePage } from './home-page.ts';
+import { AboutPage } from './about-page.ts';
 
 /**
  * An example element.
@@ -48,6 +49,7 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
   ]
 
   static scopedElements = {
+    'about-page': AboutPage,
     'home-page': HomePage,
     'my-button': MyButton,
   };
@@ -56,7 +58,7 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
     this,
     [
       { path: '/', render: () => html`<home-page></home-page>` },
-      { path: '/about', render: () => html`<h1>About</h1>` },
+      { path: '/about', render: () => html`<about-page></about-page>` },
       { path: '/space/:space/', render: () => html`<h1>Space</h1>` },
       {
         path: '/space/:space/about',
