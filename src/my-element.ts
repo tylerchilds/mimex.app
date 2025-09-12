@@ -6,6 +6,8 @@ import 'urlpattern-polyfill';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 import { MyButton } from './my-button.ts';
 import '@webcomponents/scoped-custom-element-registry';
+import { Routes } from '@lit-labs/router';
+import { HomePage } from './home-page.ts';
 
 /**
  * An example element.
@@ -27,38 +29,53 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
   @property({ type: Number })
   count = 0
 
-  render() {
-    return html`
-
-      <slot></slot>
-
-      <div class="card p-8">
-        <div class="prose max-w-none">
-          <h1 class="text-9xl text-red-500">my-element</h1>
-        </div>
-        <br />
-        <my-button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </my-button>
-      </div>
-    `
+  connectedCallback(): void {
+    super.connectedCallback?.();
+    // eslint-disable-next-line no-undef
+    this._routes.goto(globalThis?.location.pathname);
   }
 
-  private _onClick() {
-    this.count++
+  render() {
+    return html`
+      <main>
+        ${this._routes.outlet()}
+      </main>
+    `
   }
 
   static styles = [
     unsafeCSS(styles),
-    css`
-      :host {
-      }
-    `,
   ]
 
   static scopedElements = {
+    'home-page': HomePage,
     'my-button': MyButton,
   };
+
+  private _routes = new Routes(
+    this,
+    [
+      { path: '/', render: () => html`<home-page></home-page>` },
+      { path: '/about', render: () => html`<h1>About</h1>` },
+      { path: '/space/:space/', render: () => html`<h1>Space</h1>` },
+      {
+        path: '/space/:space/about',
+        render: () =>
+          html`<h1>About Space</h1>
+            <my-button></my-button>`,
+      },
+    ],
+    {
+      fallback: {
+        render: () => html`
+          <div class="prose">
+            <h1>Not Found</h1>
+          </div>
+        `,
+      },
+    },
+  );
+
 }
 
 declare global {
