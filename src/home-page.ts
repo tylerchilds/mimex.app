@@ -12,8 +12,18 @@ export class HomePage extends ScopedElementsMixin(LitElement) {
       <h1>Mimex</h1>
       <p>an exocortex for mimes like you.</p>
       <h2>Chat</h2>
-      <collection-chat src="/space/${MIMEX_GATHERING_SPACE_UUID}/chat/"></collection-chat>
+      <collection-chat src="${this.collectionSrc}"></collection-chat>
     </div>`;
+  }
+
+  get collectionSrc() {
+    const search = this.ownerDocument.location.search
+    const searchParams = new URLSearchParams(search)
+    const srcFromSearchParams = searchParams.get('src')
+    // if location had ?src={uri}, return that
+    if (srcFromSearchParams) return srcFromSearchParams
+    // default to this constant space uuid hosted on same as this element
+    return `/space/${MIMEX_GATHERING_SPACE_UUID}/chat/`
   }
 
   static styles = [
