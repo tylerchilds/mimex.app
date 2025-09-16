@@ -9,6 +9,7 @@ import '@webcomponents/scoped-custom-element-registry';
 import { Routes } from '@lit-labs/router';
 import { HomePage } from './home-page.ts';
 import { AboutPage } from './about-page.ts';
+import { ElvesPage } from './elves-page.ts';
 
 /**
  * An example element.
@@ -50,6 +51,7 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
 
   static scopedElements = {
     'about-page': AboutPage,
+    'elves-page': ElvesPage,
     'home-page': HomePage,
     'my-button': MyButton,
   };
@@ -59,6 +61,7 @@ export class MyElement extends ScopedElementsMixin(LitElement) {
     [
       { path: '/', render: () => html`<home-page></home-page>` },
       { path: '/about', render: () => html`<about-page></about-page>` },
+      { path: '/elves', render: () => html`<elves-page></elves-page>` },
       { path: '/space/:space/', render: () => html`<home-page></home-page>` },
       { path: '/space/:space/about', render: () => html`<about-page></about-page>` },
     ],
