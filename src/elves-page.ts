@@ -1,6 +1,7 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 import { MyButton } from './my-button';
+import { PathFinder } from './path-finder';
 import styles from "./home-page.css?inline"
 
 export class ElvesPage extends ScopedElementsMixin(LitElement) {
@@ -13,11 +14,13 @@ export class ElvesPage extends ScopedElementsMixin(LitElement) {
           <code>elf-elves-page</code> is an element that describes elf, written in elf.
           <!-- <elf-elves-page></elf-elves-page> -->
         </li>
+        <path-finder></path-finder>
       </ul>
     </div>`;
   }
   static scopedElements = {
     'my-button': MyButton,
+    'path-finder': PathFinder,
     // @todo add something like
     // 'elf-elves-page': (await import('./elf-elves-page.js')).ElfElvesPage
   };
